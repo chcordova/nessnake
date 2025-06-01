@@ -1,6 +1,6 @@
 ---
 
-# NesSnake (NS): ¡La Evolución del clásco Snake!
+# NesSnake (NS): ¡La evolución del clásico Snake!
 
 ---
 
