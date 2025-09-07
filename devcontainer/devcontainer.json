@@ -1,16 +1,31 @@
 {
-  "name": "Entorno con Gemini CLI",
+  "name": "Entorno con Google Cloud y Gemini",
 
   // Usamos la imagen universal que ya viene con muchas herramientas.
   "image": "mcr.microsoft.com/devcontainers/universal:2",
 
-  // "Features" son la forma moderna y recomendada de añadir herramientas.
-  // Esta línea instala automáticamente el Google Cloud SDK.
+  // "Features" para añadir herramientas a nivel del sistema operativo.
   "features": {
     "ghcr.io/devcontainers/features/google-cloud-cli:1": {}
   },
 
-  // Un pequeño comando que se ejecuta después de crear el Codespace.
-  // Te recordará que necesitas autenticarte.
-  "postCreateCommand": "echo 'Entorno listo. Ejecuta gcloud auth login para autenticarte con Google Cloud.'"
+  // "customizations" para configurar el editor de código (VS Code).
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Extensión oficial de Google Cloud. Muy recomendada.
+        "GoogleCloudTools.cloudcode",
+        // Si vas a usar Python para interactuar con la API de Gemini.
+        "ms-python.python"
+      ]
+    }
+  },
+
+  // (Opcional) Establece variables de entorno dentro del contenedor.
+   "containerEnv": {
+     "GCLOUD_PROJECT": "nessnake-app"
+   },
+
+  // Comando que se ejecuta después de crear el contenedor.
+  "postCreateCommand": "echo 'Entorno listo. Ejecuta gcloud auth login para autenticarte.'"
 }
