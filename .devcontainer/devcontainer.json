@@ -23,7 +23,7 @@
   // 1. Instala gcloud manualmente usando el gestor de paquetes apt.
   // 2. Instala las librerías de Python.
   // 3. Inicia el proceso de autenticación.
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificates gnupg curl && echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main' | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && sudo apt-get update && sudo apt-get install -y google-cloud-cli && pip install google-generativeai python-dotenv && echo 'Entorno listo. Autentícate...' && gcloud auth login && gcloud auth application-default login",
+  "postCreateCommand": "sudo apt-get clean && sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificates gnupg curl && echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main' | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && sudo apt-get update && sudo apt-get install -y google-cloud-cli && pip install google-generativeai python-dotenv && echo 'Entorno listo. Autentícate...' && gcloud auth login && gcloud auth application-default login"
 
   // Es necesario ejecutar como root para poder instalar paquetes con apt-get.
   "remoteUser": "root"
