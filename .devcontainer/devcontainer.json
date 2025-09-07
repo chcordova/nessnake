@@ -27,5 +27,7 @@
    },
 
   // Comando que se ejecuta después de crear el contenedor.
-  "postCreateCommand": "echo 'Entorno listo. Ejecuta gcloud auth login para autenticarte.'"
+  // 1. Instala las librerías de Python para Gemini.
+  // 2. Inicia el doble proceso de autenticación interactiva.
+  "postCreateCommand": "pip install google-generativeai python-dotenv && echo 'Entorno listo. A continuación, sigue los pasos en tu navegador para autenticarte...' && gcloud auth login && gcloud auth application-default login"
 }
