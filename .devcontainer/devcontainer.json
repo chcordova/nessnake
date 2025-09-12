@@ -1,29 +1,52 @@
 {
-  "name": "Entorno con Google Cloud y Gemini",
-
-  // Usamos la imagen universal que ya viene con muchas herramientas.
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-
-  // "customizations" para configurar el editor de código (VS Code).
+  "name": "NesSnake Development Environment",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [3000],
   "customizations": {
     "vscode": {
       "extensions": [
+        // --- Base & Google Cloud ---
         "GoogleCloudTools.cloudcode",
-        "ms-python.python"
-      ]
+
+        // --- Code Quality (General) ---
+        "dbaumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+
+        // --- Frontend (Phaser + TypeScript) ---
+        "SmrutiRanjanBadatya.phaser-snips",
+
+        // --- Backend (Node.js + Express) ---
+        "orta.vscode-jest",
+        "mikestead.dotenv",
+        "humao.rest-client",
+
+        // --- Mobile (CapacitorJS) ---
+        "webnative.webnative",
+
+        // --- End-to-End Testing ---
+        "ms-playwright.playwright"
+      ],
+      "settings": {
+        // --- Settings for Prettier formatting ---
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      }
     }
   },
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/gcloud,target=/home/vscode/.config/gcloud,type=bind,consistency=cached"
+  ],
+  "remoteUser": "vscode",
 
-  // (Opcional) Establece variables de entorno dentro del contenedor.
-   "containerEnv": {
-     "GCLOUD_PROJECT": "nessnake-app"
-   },
-
-  // Comando que se ejecuta después de crear el contenedor.
-  // 1. Instala gcloud manualmente usando el gestor de paquetes apt.
-  // 2. Instala las librerías de Python.
-  // 3. Inicia el proceso de autenticación.
-  "postCreateCommand": "sudo apt-get clean && sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificates gnupg curl && echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main' | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && sudo apt-get update && sudo apt-get install -y google-cloud-cli && pip install google-generativeai python-dotenv && echo 'Entorno listo. Autentícate...' && gcloud auth login && gcloud auth application-default login",
-  // Es necesario ejecutar como root para poder instalar paquetes con apt-get.
-  "remoteUser": "root"
+  // --- run the post-create script ---
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
 }

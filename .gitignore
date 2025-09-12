@@ -1,0 +1,12 @@
+# Node
+node_modules/
+dist/
+py/
+.env
+# Python
+__pycache__/
+*.pyc
+# VSCode
+.vscode/
+# Others
+.DS_Store
