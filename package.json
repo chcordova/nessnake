@@ -7,7 +7,10 @@
     "build:frontend": "tsc --project tsconfig.frontend.json && mkdir -p public/assets/sprites public/assets/audio && cp -r src/assets/* public/assets/ || true",
     "serve": "npx serve public",
     "start": "npm run build:frontend && npm run serve",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e": "npx playwright test",
+    "posttest:e2e": "bash scripts/copy-test-reports.sh",
+    "test:all": "npm run test && npm run test:e2e"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +27,7 @@
     "@babel/types": "^7.28.4",
     "@playwright/test": "^1.55.0",
     "@types/jest": "^30.0.0",
+    "@types/node": "^24.3.3",
     "expect": "^30.1.2",
     "jest": "^30.1.3",
     "jest-environment-jsdom": "^30.1.2",

@@ -1,4 +1,4 @@
-import { AssetLoader } from "./AssetLoader";
+import { AssetLoader } from "./AssetLoader.js";
 
 export class AudioManager {
   static play(key: string) {

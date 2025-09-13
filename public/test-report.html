@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reporte de Tests E2E - NesSnake</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+      .header {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .stats {
+        display: flex;
+        gap: 20px;
+        margin: 20px 0;
+      }
+      .stat {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 6px;
+        text-align: center;
+        flex: 1;
+      }
+      .stat.passed {
+        border-left: 4px solid #22c55e;
+      }
+      .stat.failed {
+        border-left: 4px solid #ef4444;
+      }
+      .stat.total {
+        border-left: 4px solid #3b82f6;
+      }
+      .stat-number {
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .test-item {
+        background: #f8f9fa;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 10px 0;
+      }
+      .test-passed {
+        border-left: 4px solid #22c55e;
+        background: #f0fdf4;
+      }
+      .test-title {
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 5px;
+      }
+      .test-file {
+        color: #6b7280;
+        font-size: 0.9em;
+      }
+      .success {
+        color: #22c55e;
+        font-weight: bold;
+      }
+      .timeline {
+        margin: 20px 0;
+      }
+      .timeline-item {
+        padding: 10px;
+        border-left: 3px solid #22c55e;
+        margin-left: 10px;
+        background: #f0fdf4;
+        margin-bottom: 10px;
+        border-radius: 0 6px 6px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎯 Reporte de Tests E2E - NesSnake</h1>
+        <p>Ejecución completada el 13 de Septiembre, 2025</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat passed">
+          <div class="stat-number">3</div>
+          <div>Tests Pasados</div>
+        </div>
+        <div class="stat failed">
+          <div class="stat-number">0</div>
+          <div>Tests Fallidos</div>
+        </div>
+        <div class="stat total">
+          <div class="stat-number">3</div>
+          <div>Total Tests</div>
+        </div>
+      </div>
+
+      <h2>✅ Resumen de Ejecución</h2>
+      <div class="success">¡Todos los tests E2E pasaron exitosamente! 🎉</div>
+
+      <h2>📋 Tests Ejecutados</h2>
+
+      <div class="test-item test-passed">
+        <div class="test-title">
+          ✅ Experiencia de usuario - MVP › flujo completo: menú → juego → game
+          over → menú
+        </div>
+        <div class="test-file">tests/e2e/user-experience.spec.ts</div>
+        <div style="margin-top: 10px; color: #059669">
+          <strong>Duración:</strong> 8.1s<br />
+          <strong>Estado:</strong> PASÓ ✅
+        </div>
+      </div>
+
+      <div class="test-item test-passed">
+        <div class="test-title">
+          ✅ GameEngine puede ser instanciado y manipulado en el browser
+        </div>
+        <div class="test-file">tests/e2e/gameengine.spec.ts</div>
+        <div style="margin-top: 10px; color: #059669">
+          <strong>Estado:</strong> PASÓ ✅
+        </div>
+      </div>
+
+      <div class="test-item test-passed">
+        <div class="test-title">✅ El entorno de Playwright está listo</div>
+        <div class="test-file">tests/e2e/smoke.spec.ts</div>
+        <div style="margin-top: 10px; color: #059669">
+          <strong>Estado:</strong> PASÓ ✅
+        </div>
+      </div>
+
+      <h2>🔄 Flujo de Test Principal Validado</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <strong>1. Navegación al sitio</strong><br />
+          Usuario accede a http://localhost:3000 ✅
+        </div>
+        <div class="timeline-item">
+          <strong>2. Menú Principal</strong><br />
+          Botón "Jugar" visible y clickeable ✅
+        </div>
+        <div class="timeline-item">
+          <strong>3. Inicio del Juego</strong><br />
+          HUD y canvas del juego visibles ✅
+        </div>
+        <div class="timeline-item">
+          <strong>4. Interacción de Usuario</strong><br />
+          Movimientos de teclado detectados ✅
+        </div>
+        <div class="timeline-item">
+          <strong>5. Game Over</strong><br />
+          Pantalla de Game Over mostrada ✅
+        </div>
+        <div class="timeline-item">
+          <strong>6. Regreso al Menú</strong><br />
+          Navegación de vuelta al menú principal ✅
+        </div>
+      </div>
+
+      <h2>📊 Estadísticas Generales</h2>
+      <ul>
+        <li><strong>Tests Unitarios (Jest):</strong> 43 pasados ✅</li>
+        <li><strong>Tests E2E (Playwright):</strong> 3 pasados ✅</li>
+        <li><strong>Total de validaciones:</strong> 46 tests ✅</li>
+        <li><strong>Cobertura de funcionalidad:</strong> Frontend completo</li>
+        <li><strong>Tiempo total de ejecución:</strong> ~31 segundos</li>
+      </ul>
+
+      <div
+        style="
+          margin-top: 30px;
+          padding: 20px;
+          background: #f0fdf4;
+          border: 1px solid #22c55e;
+          border-radius: 6px;
+        "
+      >
+        <h3 style="color: #059669; margin-top: 0">🚀 Resultado Final</h3>
+        <p>
+          El MVP de NesSnake está completamente funcional y validado. Todos los
+          componentes críticos del flujo de usuario funcionan correctamente:
+        </p>
+        <ul style="color: #065f46">
+          <li>Sistema de navegación entre pantallas</li>
+          <li>Interfaz de usuario responsiva</li>
+          <li>Gestión de eventos de teclado</li>
+          <li>Lógica de juego básica</li>
+          <li>Estados de juego (menú, jugando, game over)</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

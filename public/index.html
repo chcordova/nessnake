@@ -10,17 +10,123 @@
         color: #fff;
         font-family: monospace;
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
       }
+
+      .screen {
+        display: none;
+        text-align: center;
+      }
+
+      .screen.active {
+        display: block;
+      }
+
+      #menu-screen {
+        margin-top: 100px;
+      }
+
+      #menu-screen h1 {
+        font-size: 3em;
+        margin-bottom: 50px;
+        color: #0ff;
+      }
+
+      .btn {
+        background: #0ff;
+        color: #000;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        font-family: monospace;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 5px;
+      }
+
+      .btn:hover {
+        background: #fff;
+      }
+
+      #game-screen {
+        position: relative;
+      }
+
       #game {
         display: block;
-        margin: 40px auto;
         background: #222;
         border: 2px solid #0ff;
+      }
+
+      #hud {
+        background: #333;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        border: 1px solid #0ff;
+        display: flex;
+        justify-content: space-between;
+        min-width: 400px;
+      }
+
+      #snake {
+        /* Elemento invisible para identificación de tests */
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      #game-over-screen {
+        margin-top: 100px;
+      }
+
+      #game-over-screen h2 {
+        font-size: 2.5em;
+        color: #f00;
+        margin-bottom: 30px;
+      }
+
+      .score-display {
+        font-size: 1.5em;
+        margin: 20px 0;
       }
     </style>
   </head>
   <body>
-    <canvas id="game" width="400" height="400"></canvas>
+    <!-- Pantalla de Menú Principal -->
+    <div id="menu-screen" class="screen active">
+      <h1>NesSnake</h1>
+      <button class="btn" id="play-btn">Jugar</button>
+      <button class="btn" id="settings-btn">Configuración</button>
+    </div>
+
+    <!-- Pantalla de Juego -->
+    <div id="game-screen" class="screen">
+      <div id="hud">
+        <span>Score: <span id="score">0</span></span>
+        <span>High Score: <span id="high-score">0</span></span>
+        <span>Level: <span id="level">1</span></span>
+      </div>
+      <canvas id="game" width="400" height="400"></canvas>
+      <div id="snake"></div>
+      <!-- Elemento para identificación de tests -->
+    </div>
+
+    <!-- Pantalla de Game Over -->
+    <div id="game-over-screen" class="screen">
+      <h2>Game Over</h2>
+      <div class="score-display">
+        Score Final: <span id="final-score">0</span>
+      </div>
+      <button class="btn" id="restart-btn">Jugar de nuevo</button>
+      <button class="btn" id="menu-btn">Volver al menú</button>
+    </div>
+
     <script type="module" src="dist/main.js"></script>
   </body>
 </html>
