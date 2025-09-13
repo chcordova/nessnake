@@ -1,6 +1,6 @@
 export class Renderer {
-  private ctx: CanvasRenderingContext2D;
-
+  public ctx: CanvasRenderingContext2D;
+  // ...existing code...
   constructor(private canvas: HTMLCanvasElement) {
     this.ctx = canvas.getContext("2d")!;
   }
