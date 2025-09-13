@@ -1,7 +1,7 @@
-import { AssetLoader } from "./AssetLoader";
-import { Renderer } from "./Renderer";
-import { AudioManager } from "./AudioManager";
-import { GameLoop } from "./GameLoop";
+import { AssetLoader } from "./AssetLoader.js";
+import { Renderer } from "./Renderer.js";
+import { AudioManager } from "./AudioManager.js";
+import { GameLoop } from "./GameLoop.js";
 
 async function bootstrap() {
   await AssetLoader.loadImage("snake", "/assets/sprites/snake.png");

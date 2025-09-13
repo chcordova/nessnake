@@ -5,7 +5,11 @@
     "outDir": "./public/dist",
     "rootDir": "./src/frontend",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "types": []
   },
-  "include": ["src/frontend/**/*"]
+  "include": ["src/frontend/**/*"],
+  "exclude": ["node_modules", "tests"]
 }
