@@ -15,6 +15,14 @@
         align-items: center;
         min-height: 100vh;
         padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
       }
 
       .screen {
@@ -54,10 +62,14 @@
 
       #game-screen {
         position: relative;
+        width: min(1200px, 100%);
       }
 
       #game {
         display: block;
+        width: 100%;
+        max-width: 1200px;
+        height: auto;
         background: #222;
         border: 2px solid #0ff;
       }
@@ -69,7 +81,9 @@
         border: 1px solid #0ff;
         display: flex;
         justify-content: space-between;
-        min-width: 400px;
+        width: 100%;
+        min-width: 0;
+        gap: 12px;
       }
 
       #snake {

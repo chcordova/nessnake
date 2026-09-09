@@ -15,10 +15,10 @@ test.describe("Experiencia de usuario - MVP", () => {
     await expect(page.locator("#hud")).toBeVisible();
     await expect(page.locator("#game")).toBeVisible(); // Canvas del juego
 
-    // Simula movimiento suficiente para trigger game over
-    await page.keyboard.press("ArrowRight");
-    await page.keyboard.press("ArrowDown");
-    await page.keyboard.press("ArrowLeft");
+    // Lleva la cabeza hasta el borde derecho del canvas para provocar game over
+    for (let movement = 0; movement < 40; movement++) {
+      await page.keyboard.press("ArrowRight");
+    }
 
     // Espera pantalla de game over
     await expect(page.locator("text=Game Over")).toBeVisible();
