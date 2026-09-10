@@ -7,9 +7,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        // --- Base & Google Cloud ---
-        "GoogleCloudTools.cloudcode",
-
         // --- Code Quality (General) ---
         "dbaumer.vscode-eslint",
         "esbenp.prettier-vscode",
@@ -42,9 +39,6 @@
       }
     }
   },
-  "mounts": [
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/gcloud,target=/home/vscode/.config/gcloud,type=bind,consistency=cached"
-  ],
   "remoteUser": "vscode",
 
   // --- run the post-create script ---
