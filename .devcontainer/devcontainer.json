@@ -7,10 +7,20 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        // --- AI & Pair Programming ---
+        "Google.google-antigravity",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+
         // --- Code Quality (General) ---
         "dbaumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "streetsidesoftware.code-spell-checker",
+        "yoavbls.pretty-ts-errors",
+
+        // --- Version Control & Docker ---
+        "eamodio.gitlens",
+        "ms-azuretools.vscode-docker",
 
         // --- Frontend (Phaser + TypeScript) ---
         "SmrutiRanjanBadatya.phaser-snips",
@@ -27,9 +37,12 @@
         "ms-playwright.playwright"
       ],
       "settings": {
-        // --- Settings for Prettier formatting ---
+        // --- Settings for Prettier and ESLint formatting ---
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
         "[typescript]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
