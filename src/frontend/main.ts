@@ -131,8 +131,8 @@ const canonicalCurveConnectionPoints: [
   { x: number; y: number },
   { x: number; y: number },
 ] = [
-  { x: SPRITE_WIDTH_CURVA / 2, y: SPRITE_HEIGHT },
-  { x: SPRITE_WIDTH_CURVA, y: 4 },
+  { x: 0, y: TILE_SIZE / 2 }, // Punto A: Conecta a la Izquierda
+  { x: TILE_SIZE / 2, y: 0 }, // Punto B: Conecta Arriba
 ];
 
 function getCurveTransformForDirections(
@@ -149,30 +149,30 @@ function getCurveTransformForDirections(
   const turn = `${segment.incoming}:${segment.outgoing}`;
   let transform: NonNullable<SpriteConfig["transform"]>;
 
-  // El sprite base (sin transformar) conecta ABAJO y DERECHA.
+  // El sprite base conecta visualmente Izquierda y Arriba.
   switch (turn) {
-    // Conecta Abajo y Derecha
-    case "up:right":
-    case "left:down":
+    // Conecta Izquierda y Arriba
+    case "right:up":
+    case "down:left":
       transform = { rotate: 0, flipX: false, flipY: false };
       break;
 
-    // Conecta Abajo e Izquierda (Espejado Horizontal)
-    case "up:left":
-    case "right:down":
+    // Conecta Derecha y Arriba
+    case "left:up":
+    case "down:right":
       transform = { rotate: 0, flipX: true, flipY: false };
       break;
 
-    // Conecta Arriba y Derecha (Espejado Vertical)
-    case "down:right":
-    case "left:up":
+    // Conecta Izquierda y Abajo
+    case "right:down":
+    case "up:left":
       transform = { rotate: 0, flipX: false, flipY: true };
       break;
 
-    // Conecta Arriba e Izquierda (Rotación 180° equivalente a doble flip)
-    case "down:left":
-    case "right:up":
-      transform = { rotate: 180, flipX: false, flipY: false };
+    // Conecta Derecha y Abajo
+    case "left:down":
+    case "up:right":
+      transform = { rotate: 0, flipX: true, flipY: true };
       break;
 
     default:
@@ -294,39 +294,26 @@ function applyTransformations(
   y: number,
   width: number,
   height: number,
-  scale: number = 1, // Nuevo parámetro para escalado
+  scale: number = 1,
 ) {
   if (!transform) return;
 
-  // Para sprites rotados, necesitamos ajustar el centro para mantener la posición visual
-  let centerX = x + (width * scale) / 2;
-  let centerY = y + (height * scale) / 2;
+  // EL SECRETO: Pivotar SIEMPRE sobre el centro del Tile lógico (16x16)
+  const centerX = x + (TILE_SIZE * scale) / 2;
+  const centerY = y + (TILE_SIZE * scale) / 2;
 
-  // Ajuste especial para sprites de cuerpo cuando se rotan 90° (vertical)
-  // Esto corrige el desplazamiento de 2 píxeles que ocurre en movimiento vertical
-  if (
-    width === SPRITE_WIDTH_CUERPO &&
-    (transform.rotate === 90 || transform.rotate === -90)
-  ) {
-    // Centrar en el TILE_SIZE estándar escalado
-    centerX = x + (TILE_SIZE * scale) / 2;
-  }
-
-  // Mover al centro del sprite para aplicar transformaciones
   ctx.translate(centerX, centerY);
 
-  // Aplicar rotación
   if (transform.rotate !== 0) {
     ctx.rotate((transform.rotate * Math.PI) / 180);
   }
 
-  // Aplicar escalado para flip
   const scaleX = transform.flipX ? -1 : 1;
   const scaleY = transform.flipY ? -1 : 1;
   ctx.scale(scaleX, scaleY);
 
-  // Mover de vuelta (ahora el origen está en el centro) - ajustado para escalado
-  ctx.translate(-(width * scale) / 2, -(height * scale) / 2);
+  // Trasladar de vuelta al origen del Tile
+  ctx.translate(-(TILE_SIZE * scale) / 2, -(TILE_SIZE * scale) / 2);
 }
 
 // Función para obtener las transformaciones basadas en la dirección
